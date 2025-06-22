@@ -5,7 +5,7 @@ import random
 
 class CodaPrioritaria:
     def __init__(self):
-        self._lista = []
+        self._lista = [] # parametro protetto
 
     def put(self, x):
         """
@@ -21,12 +21,13 @@ class CodaPrioritaria:
         nella coda, e lo elimina
         :return:
         """
-        index, val = min(enumerate(self._lista), key=lambda x: x[1])
+        index, val = min(enumerate(self._lista), key=lambda x: x[1]) # enumerate trasforma la lista in una lista di tuple
+                                                                     # lista di: (*posizione nella lista*, (*priorita*, *stringa*))
         self._lista.pop(index)
-        return val[1]
+        return val # (*priorita*, *stringa*)
 
     def __len__(self):
-        return len(self._lista)
+        return len(self._lista) # delegation: chiedo a lista di dire quanto è lunga la coda
 
 
 # c = CodaPrioritaria()
@@ -40,6 +41,8 @@ c.put((2, "test"))
 print(c.get()[1])
 print(c.get()[1])
 print(c.get()[1])
+
+# CONFRONTO EFFICIENZA IN BASE AL TEMPO IMPIEGATO
 
 c1 = CodaPrioritaria()
 tic = datetime.datetime.now()
@@ -62,4 +65,4 @@ for i in range(c2.qsize()):
 
 toc = datetime.datetime.now()
 
-print(f"L'implementazione di default ci mette {toc-tic} secondi")
+print(f"L'implementazione di default ci mette {toc-tic} secondi") # MIGLIORE
